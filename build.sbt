@@ -22,4 +22,4 @@ licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 homepage := Some(url("https://github.com/gilt/gfc-semver"))
 
-version := "git describe --tags --always --dirty".!!.trim
+version := "git describe --tags --always --dirty".!!.trim.replaceFirst("^v", "")
