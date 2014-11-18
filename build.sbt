@@ -12,31 +12,14 @@ libraryDependencies ++= Seq(
 
 publishMavenStyle := true
 
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+bintraySettings
 
-publishArtifact in Test := false
+bintrayPublishSettings
 
-pomIncludeRepository := { _ => false }
+bintray.Keys.bintrayOrganization in bintray.Keys.bintray := Some("giltgroupe")
 
-licenses := Seq("MIT" -> url("https://github.com/gilt/gfc-semver/blob/master/LICENSE"))
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 homepage := Some(url("https://github.com/gilt/gfc-semver"))
 
-pomExtra := <scm>
-              <url>https://github.com/gilt/gfc-semver.git</url>
-              <connection>scm:git:git@github.com:gilt/gfc-semver.git</connection>
-            </scm>
-            <developers>
-              <developer>
-                <id>stjohnb</id>
-                <name>Brendan St John</name>
-                <url>https://github.com/stjohnb</url>
-              </developer>
-            </developers>
-
+version := "git describe --tags --always --dirty".!!.trim
