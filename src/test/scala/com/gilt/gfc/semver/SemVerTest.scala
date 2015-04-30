@@ -75,4 +75,9 @@ class SemVerTest extends FunSuite with Matchers {
     SemVer.isReleaseVersion("1.2.3") should equal (true)
     SemVer.isReleaseVersion("1.2.3-SNAPSHOT") should equal (false)
   }
+
+  test("Git tag version") {
+    val dirtyGitTag = "0.7.5-8-g476747c-dirty"
+    assert(SemVer(dirtyGitTag) === SemVer(0,7,5,Some("8-g476747c-dirty"),dirtyGitTag))
+  }
 }
