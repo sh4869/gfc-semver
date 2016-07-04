@@ -2,24 +2,42 @@ name := "gfc-semver"
 
 organization := "com.gilt"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.8"
 
-crossScalaVersions := Seq("2.11.6", "2.10.4")
+crossScalaVersions := Seq(scalaVersion.value, "2.10.5")
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.1" % "test"
 )
 
+releaseCrossBuild := true
+
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
+
 publishMavenStyle := true
-
-bintraySettings
-
-bintrayPublishSettings
-
-bintray.Keys.bintrayOrganization in bintray.Keys.bintray := Some("giltgroupe")
 
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 homepage := Some(url("https://github.com/gilt/gfc-semver"))
 
-version := "git describe --tags --always --dirty".!!.trim.replaceFirst("^v", "")
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+}
+
+publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false }
+
+pomExtra := (
+  <scm>
+    <url>https://github.com/gilt/gfc-semver.git</url>
+    <connection>scm:git:git@github.com:gilt/gfc-semver.git</connection>
+  </scm>
+  <developers>
+  </developers>
+)
+
