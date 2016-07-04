@@ -38,6 +38,11 @@ pomExtra := (
     <connection>scm:git:git@github.com:gilt/gfc-semver.git</connection>
   </scm>
   <developers>
+    <developer>
+      <id>stjohnb</id>
+      <name>Brendan St John</name>
+      <url>https://github.com/stjohnb</url>
+    </developer>
   </developers>
 )
 
