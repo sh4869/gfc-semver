@@ -1,9 +1,9 @@
 language: scala
 scala:
+  - 2.12.0-RC1
   - 2.11.8
+  - 2.10.6
 jdk:
-  - oraclejdk7
-notifications:
-  email: false
-script: "sbt clean coverage test"
+  - oraclejdk8
+script: "sbt ++$TRAVIS_SCALA_VERSION clean coverage test"
 after_success: "sbt coveralls"
